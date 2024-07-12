@@ -1,10 +1,7 @@
-
 import 'package:appmedico/screens/android/medico/usuario_medico.dart';
-import 'package:appmedico/screens/android/paciente/registrar_consulta.dart';
 import 'package:appmedico/screens/android/paciente/visualizar_consultaList.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../login_screen.dart';
 
 
@@ -94,59 +91,12 @@ class PacienteList extends StatelessWidget {
                               style: TextStyle(fontSize: 24)),
                           subtitle: const Text('CPF: 999.999.999-09',
                               style: TextStyle(fontSize: 12)),
-                          trailing:  _menu(),
-                      ),
-                      Divider(
-                        color: Colors.lightBlueAccent.shade200,
-                        endIndent: 30,
-                        thickness: 1.9,
-                        height: 13.0,
-                      ),
-                      ListTile(
-                        title: const Text('João Carlos',
-                        style: TextStyle(fontSize: 24)),
-                        subtitle: const Text('CPF: 999.888.999-09',
-                        style: TextStyle(fontSize: 12)),
-                        trailing:  _menu(),
-                      ),
-                      Divider(
-                        color: Colors.lightBlueAccent.shade200,
-                        endIndent: 30,
-                        thickness: 1.9,
-                        height: 13.0,
-                      ),
-                      ListTile(
-                        title: const Text('Anna Clara',
-                            style: TextStyle(fontSize: 24)),
-                        subtitle: const Text('CPF: 222.333.333-03',
-                            style: TextStyle(fontSize: 12)),
-                        trailing:  _menu(),
-                      ),
-                      Divider(
-                        color: Colors.lightBlueAccent.shade200,
-                        endIndent: 30,
-                        thickness: 1.9,
-                        height: 13.0,
-                      ),
-                      ListTile(
-                        title: const Text('Carlos Pires',
-                            style: TextStyle(fontSize: 24)),
-                        subtitle: const Text('CPF: 225.333.333-03',
-                            style: TextStyle(fontSize: 12)),
-                        trailing:  _menu(),
-                      ),
-                      Divider(
-                        color: Colors.lightBlueAccent.shade200,
-                        endIndent: 30,
-                        thickness: 1.9,
-                        height: 13.0,
-                      ),
-                      ListTile(
-                        title: const Text('Nelson Andrade',
-                            style: TextStyle(fontSize: 24)),
-                        subtitle: const Text('CPF: 222.333.323-03',
-                            style: TextStyle(fontSize: 12)),
-                        trailing:  _menu(),
+                        onTap: (){
+                          debugPrint('navegar para o registrar consulats');
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => VisualizaConsultaList()
+                          ));
+                        },
                       ),
                       Divider(
                         color: Colors.lightBlueAccent.shade200,
@@ -174,9 +124,9 @@ class PacienteList extends StatelessWidget {
             value: ItensMenuListPaciente.Registrar_Consultas,
             onTap: (){
               debugPrint('navegar para o registrar consulats');
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => RegistrarConsulta()
-              ));
+              //Navigator.of(context).push(MaterialPageRoute(
+                  //builder: (context) => RegistrarConsulta()
+              //));
             },
             child: Text('Registrar Consulta'),
 

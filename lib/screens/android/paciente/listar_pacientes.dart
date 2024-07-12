@@ -1,11 +1,6 @@
-
 import 'package:appmedico/app-core/persistence/paciente_db.dart';
 import 'package:appmedico/screens/android/paciente/visualizar_consultaList.dart';
-
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-
-import '../../../app-core/persistence/db_helper.dart';
 import '../login_screen.dart';
 import '../medico/usuario_medico.dart';
 

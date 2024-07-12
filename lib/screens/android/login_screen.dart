@@ -1,6 +1,4 @@
-
 import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
-
 import 'package:appmedico/screens/android/testes.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart' as sql;
-import 'package:sqflite/sqflite.dart';
+
 
 class SQLHelper{
   static Future<void> createTables(sql.Database database) async{
@@ -11,7 +11,7 @@ class SQLHelper{
     telefone TEXT,
     registro TEXT,
     foto TEXT,
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    createdAt TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
     )""");
     await database.execute("""CREATE TABLE paciente(
     idpac INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -25,7 +25,7 @@ class SQLHelper{
     obs TEXT,
     presc TEXT,
     idpaciente INTEGER,
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    createdAt TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
     FOREIGN KEY (idpaciente) REFERENCES paciente(idpac)
     )""");
   }

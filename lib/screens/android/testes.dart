@@ -1,8 +1,6 @@
 import 'package:appmedico/screens/android/login_screen.dart';
 import 'package:appmedico/screens/android/medico/criamed.dart';
 import 'package:appmedico/screens/android/paciente/criapaciente.dart';
-import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
-
 import 'package:flutter/material.dart';
 
 class Testes extends StatelessWidget {

@@ -1,13 +1,8 @@
 import 'package:appmedico/screens/android/medico/usuario_medico.dart';
 import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
 import 'package:flutter/material.dart';
-import 'package:appmedico/app-core/persistence/db_helper.dart';
 import 'package:appmedico/app-core/persistence/consulta_db.dart';
-import 'package:appmedico/app-core/persistence/medico_db.dart';
-import 'package:sqflite/sqflite.dart';
-
 import '../login_screen.dart';
-import '../medico/criamed.dart';
 
 
 class VisualizaConsultaList extends StatefulWidget {

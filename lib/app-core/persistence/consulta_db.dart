@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart' as sql;
 import 'package:appmedico/app-core/persistence/db_helper.dart';
+import 'package:intl/intl.dart';
 
 class ConsultaDb{
   static Future<int> createConsulta(String sintoma, String obs, String presc,int idpaciente) async{
@@ -29,11 +30,13 @@ class ConsultaDb{
 
   static Future<int> updateConsulta(int id, String sintoma, String obs, String presc) async{
     final db = await SQLHelper.db();
+    DateTime now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd HH:mm:ss').format(now);
     final consulta = {
       'sintoma': sintoma,
       'obs': obs,
       'presc': presc,
-      'createdAt': DateTime.now().toString()
+      'createdAt': formattedDate.toString()
     };
     final result =
     await db.update('consulta', consulta, where: "id = ?", whereArgs: [id]);

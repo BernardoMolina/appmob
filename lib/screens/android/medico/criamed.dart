@@ -1,13 +1,7 @@
-
 import 'package:appmedico/app-core/persistence/medico_db.dart';
 import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
-
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
-
-import '../../../app-core/persistence/db_helper.dart';
 import '../login_screen.dart';
-
 
 class User_medicoo extends StatefulWidget {
   @override

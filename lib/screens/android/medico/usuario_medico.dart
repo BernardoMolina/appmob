@@ -4,8 +4,6 @@ import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sqflite/sqflite.dart';
-import '../../../app-core/persistence/db_helper.dart';
 import '../login_screen.dart';
 
 

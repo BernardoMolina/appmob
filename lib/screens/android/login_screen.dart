@@ -1,5 +1,7 @@
 
-import 'package:appmedico/screens/android/paciente/paciente_list.dart';
+import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
+
+import 'package:appmedico/screens/android/testes.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatelessWidget {
@@ -61,7 +63,7 @@ class Login extends StatelessWidget {
                       onPressed: () {
                         debugPrint('navegar para o home');
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => PacienteList()
+                            builder: (context) => List_paciente()
                         ));
                         print('Email: ${_emailController.text}');
                         print('Senha: ${_passwordController.text}');
@@ -69,6 +71,25 @@ class Login extends StatelessWidget {
                       child:  Text('Acessar'),
                   ),
                 ),
+              Container(
+                child: MaterialButton(
+                  color: Colors.lightBlue.shade100,
+                  elevation: 7,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  onPressed: () {
+                    debugPrint('navegar para o home');
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => Testes()
+                    ));
+                    print('Email: ${_emailController.text}');
+                    print('Senha: ${_passwordController.text}');
+                  },
+                  child:  Text('TESTES'),
+                ),
+              ),
+
             ],
           ),
         ),

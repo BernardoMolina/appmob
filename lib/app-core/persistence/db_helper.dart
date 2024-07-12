@@ -3,13 +3,6 @@ import 'package:sqflite/sqflite.dart';
 
 class SQLHelper{
   static Future<void> createTables(sql.Database database) async{
-    await database.execute("""CREATE TABLE consulta(
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    sintoma TEXT,
-    obs TEXT,
-    presc TEXT,
-    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-    )""");
     await database.execute("""CREATE TABLE medico(
     idmed INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     nome TEXT,
@@ -19,6 +12,21 @@ class SQLHelper{
     registro TEXT,
     foto TEXT,
     createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )""");
+    await database.execute("""CREATE TABLE paciente(
+    idpac INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    nome TEXT,
+    email TEXT,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    )""");
+    await database.execute("""CREATE TABLE consulta(
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    sintoma TEXT,
+    obs TEXT,
+    presc TEXT,
+    idpaciente INTEGER,
+    createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (idpaciente) REFERENCES paciente(idpac)
     )""");
   }
 

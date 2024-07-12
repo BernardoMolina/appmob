@@ -1,5 +1,5 @@
 
-import 'package:appmedico/app-core/persistence/medico_db.dart';
+import 'package:appmedico/app-core/persistence/paciente_db.dart';
 import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
 
 import 'package:flutter/material.dart';
@@ -7,23 +7,24 @@ import 'package:sqflite/sqflite.dart';
 
 import '../../../app-core/persistence/db_helper.dart';
 import '../login_screen.dart';
+import '../medico/usuario_medico.dart';
 
 
-class User_medicoo extends StatefulWidget {
+class User_paciente extends StatefulWidget {
   @override
-  State<User_medicoo> createState() => _User_medicooState();
+  State<User_paciente> createState() => _User_pacienteState();
 }
 
-class _User_medicooState extends State<User_medicoo> {
+class _User_pacienteState extends State<User_paciente> {
 
-  List<Map<String, dynamic>> _allMedico = [];
+  List<Map<String, dynamic>> _allPaciente = [];
 
   bool _isLoading = true;
 
-  void _refreshMedico() async {
-    final medico = await MedicoDb.getAllMedico();
+  void _refreshPaciente() async {
+    final paciente = await PacienteDb.getAllPaciente();
     setState(() {
-      _allMedico = medico;
+      _allPaciente = paciente;
       _isLoading = false;
     });
   }
@@ -31,28 +32,22 @@ class _User_medicooState extends State<User_medicoo> {
   @override
   void initState(){
     super.initState();
-    _refreshMedico();
+    _refreshPaciente();
   }
 
 
 
   final TextEditingController _nomeController = TextEditingController();
-  final TextEditingController _cpfController = TextEditingController();
-  final TextEditingController _registroController = TextEditingController();
-  final TextEditingController _telefoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
 
-  void showBottomSheet(int? idmed) async{
+  void showBottomSheet(int? idpac) async{
     //if id is not null then it will updata se nao vai add
     //quando press o edit vai pro bootm shet e att
-    if(idmed!=null){
-      final existingMedico =
-      _allMedico.firstWhere((element) => element['idmed'] == idmed);
-      _nomeController.text = existingMedico['nome'];
-      _emailController.text = existingMedico['email'];
-      _telefoneController.text = existingMedico['telefone'];
-      _registroController.text = existingMedico['registro'];
-      _cpfController.text = existingMedico['cpf'];
+    if(idpac!=null){
+      final existingPaciente =
+      _allPaciente.firstWhere((element) => element['idpac'] == idpac);
+      _nomeController.text = existingPaciente['nome'];
+      _emailController.text = existingPaciente['email'];
 
     }
 
@@ -80,31 +75,6 @@ class _User_medicooState extends State<User_medicoo> {
             ),
             SizedBox(height: 10),
             TextField(
-              controller: _cpfController,
-              maxLines: 4,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "cpf",
-              ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _telefoneController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "telefone",
-              ),
-            ),
-            SizedBox(height: 10),
-            TextField(
-              controller: _registroController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "registro",
-              ),
-            ),
-            SizedBox(height: 10),
-            TextField(
               controller: _emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -115,17 +85,14 @@ class _User_medicooState extends State<User_medicoo> {
             Center(
               child: ElevatedButton(
                 onPressed: () async {
-                  if(idmed == null){
-                    await _addMedico();
+                  if(idpac == null){
+                    await _addPaciente();
                   }
-                  if(idmed != null){
-                    await _updateMedico(idmed);
+                  if(idpac != null){
+                    await _updatePaciente(idpac);
                   }
 
                   _nomeController.text = "";
-                  _cpfController.text = "";
-                  _registroController.text = "";
-                  _telefoneController.text = "";
                   _emailController.text = "";
 
                   Navigator.of(context).pop();
@@ -133,7 +100,7 @@ class _User_medicooState extends State<User_medicoo> {
                 },
                 child: Padding(
                   padding: EdgeInsets.all(18),
-                  child: Text(idmed == null ? "Add Data" : "Update",
+                  child: Text(idpac == null ? "Add Data" : "Update",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -146,15 +113,14 @@ class _User_medicooState extends State<User_medicoo> {
   }
 
   //add
-  Future<void> _addMedico() async{
-    await MedicoDb.createMedico(_nomeController.text, _cpfController.text,_registroController.text,_telefoneController.text,_emailController.text);
-    _refreshMedico();
+  Future<void> _addPaciente() async{
+    await PacienteDb.createPaciente(_nomeController.text,_emailController.text);
+    _refreshPaciente();
   }
   //update
-  Future<void> _updateMedico(int idmed) async{
-    await MedicoDb.updateMedico(idmed, _nomeController.text, _cpfController.text
-        , _registroController.text, _telefoneController.text, _emailController.text);
-    _refreshMedico();
+  Future<void> _updatePaciente(int idpac) async{
+    await PacienteDb.updatePaciente(idpac, _nomeController.text, _emailController.text);
+    _refreshPaciente();
   }
 
   @override
@@ -163,7 +129,7 @@ class _User_medicooState extends State<User_medicoo> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent.shade100,
-        title: Text('Cria medico'),
+        title: Text('Cria paciente'),
         automaticallyImplyLeading: false,
         actions: <Widget>[
           InkWell(
@@ -204,7 +170,7 @@ class _User_medicooState extends State<User_medicoo> {
             icon: InkWell(
               onTap: (){
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => User_medicoo()
+                    builder: (context) => User_medico()
                 ));
               },
               child: const Padding(
@@ -221,26 +187,26 @@ class _User_medicooState extends State<User_medicoo> {
         child: CircularProgressIndicator(),
       )
           : ListView.builder(
-        itemCount: _allMedico.length,
+        itemCount: _allPaciente.length,
         itemBuilder: (context, index) => Card(
           margin: EdgeInsets.all(15),
           child: ListTile(
             title: Padding(
               padding: EdgeInsets.symmetric(vertical: 5),
               child: Text(
-                _allMedico[index]['nome'],
+                _allPaciente[index]['nome'],
                 style: TextStyle(
                   fontSize: 20,
                 ),
               ),
             ),
-            subtitle: Text(_allMedico[index]['cpf']),
+            subtitle: Text(_allPaciente[index]['email']),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
                   onPressed: (){
-                    showBottomSheet(_allMedico[index]['idmed']);
+                    showBottomSheet(_allPaciente[index]['idpac']);
                   },
                   icon: Icon(
                     Icons.edit,

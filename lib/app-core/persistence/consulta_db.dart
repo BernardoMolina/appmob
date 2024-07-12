@@ -2,10 +2,10 @@ import 'package:sqflite/sqflite.dart' as sql;
 import 'package:appmedico/app-core/persistence/db_helper.dart';
 
 class ConsultaDb{
-  static Future<int> createConsulta(String sintoma, String obs, String presc) async{
+  static Future<int> createConsulta(String sintoma, String obs, String presc,int idpaciente) async{
     final db = await SQLHelper.db();
 
-    final consulta = {'sintoma' : sintoma, 'obs' :obs, 'presc' : presc};
+    final consulta = {'sintoma' : sintoma, 'obs' :obs, 'presc' : presc, 'idpaciente': idpaciente};
     final id = await db.insert('consulta', consulta,conflictAlgorithm: sql.ConflictAlgorithm.replace);
 
     return id;
@@ -19,6 +19,11 @@ class ConsultaDb{
   static Future<List<Map<String, dynamic>>> getSingleConsulta(int id) async{
     final db = await SQLHelper.db();
     return db.query('consulta', where: "id = ?", whereArgs: [id], limit: 1);
+  }
+
+  static Future<List<Map<String, dynamic>>> getConsultaFromPaciente(int idpaciente) async{
+    final db = await SQLHelper.db();
+    return db.query('consulta', where: "idpaciente = ?", whereArgs: [idpaciente], orderBy: 'id');
 
   }
 

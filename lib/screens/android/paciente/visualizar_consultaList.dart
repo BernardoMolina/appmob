@@ -1,4 +1,5 @@
 import 'package:appmedico/screens/android/medico/usuario_medico.dart';
+import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
 import 'package:flutter/material.dart';
 import 'package:appmedico/app-core/persistence/db_helper.dart';
 import 'package:appmedico/app-core/persistence/consulta_db.dart';
@@ -7,23 +8,32 @@ import 'package:sqflite/sqflite.dart';
 
 import '../login_screen.dart';
 import '../medico/criamed.dart';
-import 'paciente_list.dart';
+
 
 class VisualizaConsultaList extends StatefulWidget {
+
+  final int idpaciente;
+
+  VisualizaConsultaList({required this.idpaciente});
+
+
 
   @override
   State<VisualizaConsultaList> createState() => _VisualizaConsultaListState();
 }
-  
+
   
   class _VisualizaConsultaListState extends State<VisualizaConsultaList>{
 
     List<Map<String, dynamic>> _allConsulta = [];
 
     bool _isLoading = true;
+
+
+
     //pega do banco
     void _refreshConsulta() async {
-      final consulta = await ConsultaDb.getAllConsulta();
+      final consulta = await ConsultaDb.getConsultaFromPaciente(widget.idpaciente);
       setState(() {
         _allConsulta = consulta;
         _isLoading = false;
@@ -41,6 +51,7 @@ class VisualizaConsultaList extends StatefulWidget {
     final TextEditingController _sintomaController = TextEditingController();
     final TextEditingController _obsController = TextEditingController();
     final TextEditingController _prescController = TextEditingController();
+
 
     void showBottomSheet(int? id) async{
       // se for not null vai update se nao vai add
@@ -132,7 +143,7 @@ class VisualizaConsultaList extends StatefulWidget {
 
     //add
     Future<void> _addConsulta() async{
-      await ConsultaDb.createConsulta(_sintomaController.text, _obsController.text, _prescController.text);
+      await ConsultaDb.createConsulta(_sintomaController.text, _obsController.text, _prescController.text,widget.idpaciente);
       _refreshConsulta();
     }
     //update
@@ -157,7 +168,7 @@ class VisualizaConsultaList extends StatefulWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.lightBlueAccent.shade100,
-          title: Text('Consultas - Bernado Molina'),
+          title: Text('Consultas'),
           automaticallyImplyLeading: false,
           actions: <Widget>[
             InkWell(
@@ -184,7 +195,7 @@ class VisualizaConsultaList extends StatefulWidget {
               icon: InkWell(
                 onTap: (){
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => PacienteList()
+                      builder: (context) => List_paciente()
                   ));
                 },
                 child: const Padding(
@@ -198,7 +209,7 @@ class VisualizaConsultaList extends StatefulWidget {
               icon: InkWell(
                 onTap: (){
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (context) => User_medicoo()
+                      builder: (context) => User_medico()
                   ));
                 },
                 child: const Padding(

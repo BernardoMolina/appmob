@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:appmedico/app-core/persistence/medico_db.dart';
+import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sqflite/sqflite.dart';
 import '../../../app-core/persistence/db_helper.dart';
 import '../login_screen.dart';
-import '../paciente/paciente_list.dart';
+
 
 class User_medico extends StatefulWidget {
   @override
@@ -197,7 +198,7 @@ class _User_medicoState extends State<User_medico> {
             icon: InkWell(
               onTap: (){
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => PacienteList()
+                    builder: (context) => List_paciente()
                 ));
               },
               child: const Padding(

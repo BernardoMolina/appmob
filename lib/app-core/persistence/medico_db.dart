@@ -3,10 +3,10 @@ import 'package:appmedico/app-core/persistence/db_helper.dart';
 
 class MedicoDb{
 
-  static Future<int> createMedico(String nome, String cpf, String registro,String telefone,String email) async{
+  static Future<int> createMedico(String nome, String cpf, String registro,String telefone,String email,String senha) async{
     final db = await SQLHelper.db();
 
-    final medico = {'nome' : nome, 'cpf' :cpf, 'registro' : registro, 'telefone' : telefone, 'email' : email};
+    final medico = {'nome' : nome, 'cpf' :cpf, 'registro' : registro, 'telefone' : telefone,'senha' : senha, 'email' : email};
     final idmed = await db.insert('medico', medico,conflictAlgorithm: sql.ConflictAlgorithm.replace);
 
     return idmed;

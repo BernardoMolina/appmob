@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:appmedico/app-core/persistence/medico_db.dart';
 import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,6 +34,7 @@ class _User_medicoState extends State<User_medico> {
   }
 
 
+  CollectionReference _medicos = FirebaseFirestore.instance.collection("medico");
 
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _cpfController = TextEditingController();

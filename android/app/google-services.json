@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "962649181308",
+    "project_id": "servidormedico-1e42a",
+    "storage_bucket": "servidormedico-1e42a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962649181308:android:e88ead78e6a0e37f61cdf9",
+        "android_client_info": {
+          "package_name": "br.ufsm.csi.appmedico"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMUG7LLtYzlRjiyOjvc9I5I-a_-uq7RIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

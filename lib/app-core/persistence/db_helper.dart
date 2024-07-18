@@ -10,6 +10,7 @@ class SQLHelper{
     email TEXT,
     telefone TEXT,
     registro TEXT,
+    senha TEXT,
     foto TEXT,
     createdAt TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
     )""");

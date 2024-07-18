@@ -1,11 +1,16 @@
+import 'package:appmedico/screens/android/_comum/meu_snackbar.dart';
+import 'package:appmedico/screens/android/appmedico.dart';
 import 'package:appmedico/screens/android/paciente/listar_pacientes.dart';
 import 'package:appmedico/screens/android/testes.dart';
 import 'package:flutter/material.dart';
 
+import '../../app-core/persistence/autenticacao.dart';
+
 class Login extends StatelessWidget {
 
+  Autenticacao _autenticacao = Autenticacao();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,7 @@ class Login extends StatelessWidget {
               Container(height: 20),
               Container(
                 child: TextField(
-                  controller: _passwordController,
+                  controller: _senhaController,
                   decoration: const InputDecoration(
                     labelText: 'Senha',
                     border: OutlineInputBorder(),
@@ -59,12 +64,15 @@ class Login extends StatelessWidget {
                         borderRadius: BorderRadius.circular(30)
                       ),
                       onPressed: () {
+                        _autenticacao.logarMedico(email: _emailController.text, senha: _senhaController.text).then((String? erro){
+                          if(erro != null){
+                            mostrarSnackBar(context: context, texto: erro);
+                          }
+                        });
                         debugPrint('navegar para o home');
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => List_paciente()
-                        ));
+
                         print('Email: ${_emailController.text}');
-                        print('Senha: ${_passwordController.text}');
+                        print('Senha: ${_senhaController.text}');
                       },
                       child:  Text('Acessar'),
                   ),
@@ -77,12 +85,13 @@ class Login extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30)
                   ),
                   onPressed: () {
+
                     debugPrint('navegar para o home');
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => Testes()
                     ));
                     print('Email: ${_emailController.text}');
-                    print('Senha: ${_passwordController.text}');
+                    print('Senha: ${_senhaController.text}');
                   },
                   child:  Text('TESTES'),
                 ),

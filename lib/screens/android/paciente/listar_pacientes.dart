@@ -1,3 +1,4 @@
+import 'package:appmedico/app-core/persistence/autenticacao.dart';
 import 'package:appmedico/app-core/persistence/paciente_db.dart';
 import 'package:appmedico/screens/android/paciente/visualizar_consultaList.dart';
 import 'package:flutter/material.dart';
@@ -46,9 +47,7 @@ class _List_pacienteState extends State<List_paciente> {
         actions: <Widget>[
           InkWell(
             onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => Login()
-              ));
+              Autenticacao().deslogar();
             },
             child: const Padding(
               padding: EdgeInsets.only(right: 25, left: 25),
